@@ -9,23 +9,33 @@ export default function MailingList() {
     e.preventDefault();
     setStatus('loading');
     
-    // TODO: Implement actual email subscription logic here
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Subscription failed');
+      }
+
       setStatus('success');
       setEmail('');
     } catch (error) {
+      console.error('Error subscribing to mailing list:', error);
       setStatus('error');
     }
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-gradient-to-br from-purple-900/30 to-blue-900/30 backdrop-blur-sm rounded-xl p-8 border border-gray-800">
+    <div className="w-full max-w-2xl mx-auto bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
       <div className="text-center mb-6">
-        <Mail className="w-12 h-12 mx-auto mb-4 text-purple-400" />
-        <h3 className="text-2xl font-semibold mb-2">Stay in the Loop</h3>
-        <p className="text-gray-300">
+        <Mail className="w-12 h-12 mx-auto mb-4 text-[#8C1515]" />
+        <h3 className="text-2xl font-semibold mb-2 text-gray-900">Stay in the Loop</h3>
+        <p className="text-gray-600">
           Join our mailing list to receive updates about events, opportunities, and community news.
         </p>
       </div>
@@ -37,23 +47,23 @@ export default function MailingList() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="flex-1 px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 text-white placeholder-gray-400"
+            className="flex-1 px-4 py-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#8C1515] text-gray-900 placeholder-gray-400"
             required
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-[#8C1515] text-white rounded-lg font-semibold hover:bg-[#8C1515]/90 transform hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
           </button>
         </div>
 
         {status === 'success' && (
-          <p className="text-green-400 text-sm">Thanks for subscribing! We'll be in touch soon.</p>
+          <p className="text-green-600 text-sm">Thanks for subscribing! We'll be in touch soon.</p>
         )}
         {status === 'error' && (
-          <p className="text-red-400 text-sm">Something went wrong. Please try again later.</p>
+          <p className="text-red-600 text-sm">Something went wrong. Please try again later.</p>
         )}
       </form>
     </div>
