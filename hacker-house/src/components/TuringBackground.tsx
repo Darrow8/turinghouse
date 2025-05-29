@@ -42,6 +42,13 @@ const TuringBackground: React.FC = () => {
     return isMobile() ? MOBILE_PIXEL_SIZE : DESKTOP_PIXEL_SIZE;
   };
 
+  const startAnimation = (): void => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      animationRef.current = requestAnimationFrame(animate);
+    }
+  };
+
   useEffect(() => {
     const loadImage = (): void => {
       const img = new Image();
@@ -140,7 +147,6 @@ const TuringBackground: React.FC = () => {
         
         console.log(`Created ${newPixels.length} pixels`);
         pixelsRef.current = newPixels;
-        setImageLoaded(true);
         // Start animation automatically when image is loaded
         startAnimation();
       };
@@ -196,7 +202,7 @@ const TuringBackground: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [getImageSource, getPixelSize, startAnimation]);
 
   const drawPixels = (ctx: CanvasRenderingContext2D): void => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -288,47 +294,6 @@ const TuringBackground: React.FC = () => {
       console.log('Animation complete');
       setIsAnimating(false);
     }
-  };
-
-  const startAnimation = (): void => {
-    console.log('Start animation clicked');
-    
-    if (isAnimating || pixelsRef.current.length === 0) {
-      console.log('Cannot start: already animating or no pixels');
-      return;
-    }
-    
-    // Cancel any existing animation
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-    
-    // Reset all pixels to starting positions
-    for (let i = 0; i < pixelsRef.current.length; i++) {
-      const pixel = pixelsRef.current[i];
-      pixel.x = pixel.targetX + (Math.random() - 0.5) * 40;
-      pixel.y = -getPixelSize() - Math.random() * 200;
-      pixel.velocity = 0;
-      pixel.delay = Math.random() * 50 + (pixel.targetY / canvasRef.current!.height) * 30;
-      pixel.started = false;
-      pixel.settled = false;
-    }
-    
-    setProgress(0);
-    console.log('Starting animation...');
-    setIsAnimating(true);
-    
-    // Clear canvas
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
-    }
-    
-    // Start the animation loop
-    animationRef.current = requestAnimationFrame(animate);
   };
 
   const resetCanvas = (): void => {

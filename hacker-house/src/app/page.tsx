@@ -1,15 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Code, Users, Rocket, Calendar, MapPin, Mail, Github, Twitter, Globe, Menu, X } from 'lucide-react';
+import { ChevronDown, MapPin, Mail, Globe, Menu, X } from 'lucide-react';
 import MailingList from '@/components/MailingList';
+import Image from 'next/image';
 
 export default function TuringHouseLanding() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [stars, setStars] = useState<Array<{ left: string; top: string; delay: string; duration: string }>>([]);
 
-  let people = [
+  const people = [
     {
       "name": "Allen Chau",
       "link": "https://www.linkedin.com/in/allen-chau-41342a1b6//",
@@ -212,7 +213,7 @@ export default function TuringHouseLanding() {
             Turing House
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in-delay">
-            We're a group of ambitious young founders building the future.
+            We&apos;re a group of ambitious young founders building the future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
             <div className="w-full max-w-md">
@@ -339,9 +340,11 @@ export default function TuringHouseLanding() {
                 className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[#8C1515] transition-all hover:transform hover:scale-105 cursor-pointer shadow-sm"
               >
                 <div className="flex items-start space-x-4">
-                  <img
+                  <Image
                     src={person.image}
                     alt={person.name}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-full object-cover"
                   />
                   <div>

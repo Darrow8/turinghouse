@@ -60,7 +60,7 @@ export default function MailingList() {
         </div>
 
         {status === 'success' && (
-          <p className="text-green-600 text-sm">Thanks for subscribing! We'll be in touch soon.</p>
+          <p className="text-green-600 text-sm">Thanks for subscribing! We&apos;ll be in touch soon.</p>
         )}
         {status === 'error' && (
           <p className="text-red-600 text-sm">Something went wrong. Please try again later.</p>
