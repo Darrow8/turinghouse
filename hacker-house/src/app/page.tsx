@@ -219,25 +219,36 @@ export default function TuringHouseLanding() {
             <div className="w-full max-w-md">
               <form onSubmit={(e) => {
                 e.preventDefault();
-                const email = (e.target as HTMLFormElement).email.value;
+                const form = e.target as HTMLFormElement;
+                const email = form.email.value;
                 fetch('/api/subscribe', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ email })
                 }).then(() => {
-                  (e.target as HTMLFormElement).reset();
-                  alert('Thanks for subscribing!');
+                  form.reset();
+                  const successMessage = document.createElement('p');
+                  successMessage.className = 'text-green-600 text-sm mt-2';
+                  successMessage.textContent = 'Thanks for subscribing!';
+                  form.insertAdjacentElement('afterend', successMessage);
+                  setTimeout(() => successMessage.remove(), 5000);
                 }).catch(() => {
-                  alert('Something went wrong. Please try again.');
+                  const errorMessage = document.createElement('p');
+                  errorMessage.className = 'text-red-600 text-sm mt-2';
+                  errorMessage.textContent = 'Something went wrong. Please try again.';
+                  form.insertAdjacentElement('afterend', errorMessage);
+                  setTimeout(() => errorMessage.remove(), 5000);
                 });
               }} className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-4 py-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#8C1515] text-gray-900 placeholder-gray-400"
-                />
+                <div className="flex-1">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#8C1515] text-gray-900 placeholder-gray-400"
+                  />
+                </div>
                 <button
                   type="submit"
                   className="px-8 py-3 bg-[#8C1515] text-white rounded-lg font-semibold hover:bg-[#8C1515]/90 transform hover:scale-105 transition-all"
