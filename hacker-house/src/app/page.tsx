@@ -1,14 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, MapPin, Mail, Globe, Menu, X } from 'lucide-react';
+import { ChevronDown, MapPin, Mail, Globe, Menu, X, Building } from 'lucide-react';
 import MailingList from '@/components/MailingList';
 import Image from 'next/image';
 
 export default function TuringHouseLanding() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [stars, setStars] = useState<Array<{ left: string; top: string; delay: string; duration: string }>>([]);
 
   const people = [
     {
@@ -17,7 +16,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/allen.jpeg",
       "location": "Dallas, TX",
       "bullets": [
-        "Junior at Stanford majoring in computer science",
+        "Stanford Junior studying CS",
         "Building agents for enterprise sales this summer",
         "Researching reasoning with LLMs + RL at Stanford Hazy Lab"
       ]
@@ -28,7 +27,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/dhruv.jpeg",
       "location": "Singapore, Singapore",
       "bullets": [
-        "Freshman CS + Business @USC",
+        "USC Freshman studying CS & Business",
         "Building Veyra Health, a medical bill disputing service that detects errors and negotiates for patients",
         "$35K in funding, Backed by Ben Taft of Genius Ventures ($10K)"
       ]
@@ -39,9 +38,20 @@ export default function TuringHouseLanding() {
       "image": "/profile/ismael.png",
       "location": "San Antonio, TX",
       "bullets": [
-        "Sophomore at Stanford majoring in CS",
-        "Form-filling automation in the healthcare space",
-        "Interned at Amazon Lab126 last summer where I developed a spec that will be used in Amazon's EchoBuds"
+        "Stanford Sophomore studying CS",
+        "Building agents for tedious document flows in healthcare",
+        "Interned at Amazon Lab126 where I used ML to develop a production spec for Echo Buds"
+      ]
+    },
+    {
+      "name": "Rodin Shokravi",
+      "link":"https://www.linkedin.com/in/rodinsh/",
+      "image": "/profile/rodin.png",
+      "location":"Vancouver, Canada",
+      "bullets": [
+        "USC Freshman studying CS",
+        "Founder of Nara: automating back-office operations at home care agencies",
+        "Built a 3D-printed glove with haptic actuators that simulates different surface textures"
       ]
     },
     {
@@ -50,7 +60,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/darrow.jpeg",
       "location": "Seattle, WA",
       "bullets": [
-        "Sophomore at Stanford majoring in computer science",
+        "Stanford Sophomore studying CS",
         "Building daily AI podcasts for professionals this summer",
         "Interned at Promoted AI (Acq. Dropbox) where I developed production RAG products"
       ]
@@ -61,7 +71,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/jet.jpeg",
       "location": "Santa Monica, CA",
       "bullets": [
-        "Freshman at USC majoring in entrepreneurship",
+        "USC Freshman studying Entrepreneurship",
         "1st employee at Rari Capital (acq for 360m)",
         "Early eng Pentagon (acq FTX)",
         "Built Huff, 3rd largest smart contract programming language in the Ethereum ecosystem"
@@ -73,7 +83,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/makar.jpeg",
       "location": "Lviv, Ukraine",
       "bullets": [
-        "Senior at MIT majoring in electrical engineering",
+        "MIT Senior studying Electrical Engineering",
         "Building Cursor for performance engineering in embedded systems",
         "Interned at Nvidia where I did GPU design"
       ]
@@ -84,7 +94,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/christian.jpeg",
       "location": "New York, NY",
       "bullets": [
-        "Freshman at the USC Iovine and Young Academy majoring in arts, tech, and business",
+        "USC Freshman studying Arts, Tech, and Business through the Iovine and Young Academy",
         "Leading growth at AfterQuery, a YC-backed data lab for foundational models",
         "Built a $250K marketing agency in high school"
       ]
@@ -95,7 +105,7 @@ export default function TuringHouseLanding() {
       "image": "/profile/hristo.jpeg",
       "location": "Bulgaria",
       "bullets": [
-        "Junior at Stanford studying Math & Classics.",
+        "Stanford Junior studying Math & Classics.",
         "Building agents for logistics payment this summer.",
         "Personal project on cryptography.",
         "Paper published at ICML recently."
@@ -107,23 +117,18 @@ export default function TuringHouseLanding() {
       "image": "/profile/cooper.jpeg",
       "location": "Palm Beach, FL",
       "bullets": [
-        "Stanford sophomore studying Computer Science",
+        "Stanford Sophomore studying CS",
         "Focused on building technology for the construction industry",
         "Former Growth Equity Analyst Intern at Bregal Sagemount"
       ]
     }
-  ].sort((a, b) => a.name.split(' ')[0].localeCompare(b.name.split(' ')[0]));
+  ].sort((a, b) => {
+    const aLastName = a.name.split(' ').pop() || '';
+    const bLastName = b.name.split(' ').pop() || '';
+    return aLastName.localeCompare(bLastName);
+  });
 
   useEffect(() => {
-    // Generate stars only on client side
-    const generatedStars = [...Array(50)].map(() => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${3 + Math.random() * 4}s`
-    }));
-    setStars(generatedStars);
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -137,28 +142,7 @@ export default function TuringHouseLanding() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#8C1515]/5 via-white to-[#8C1515]/5" />
-        <div className="absolute inset-0">
-          {stars.map((star, i) => (
-            <div
-              key={i}
-              className="absolute animate-pulse"
-              style={{
-                left: star.left,
-                top: star.top,
-                animationDelay: star.delay,
-                animationDuration: star.duration
-              }}
-            >
-              <div className="w-1 h-1 bg-[#8C1515]/10 rounded-full" />
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden font-[var(--font-fira)]">
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
