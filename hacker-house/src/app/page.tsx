@@ -44,17 +44,6 @@ export default function TuringHouseLanding() {
       ]
     },
     {
-      "name": "Rodin Shokravi",
-      "link":"https://www.linkedin.com/in/rodinsh/",
-      "image": "/profile/rodin.png",
-      "location":"Vancouver, Canada",
-      "bullets": [
-        "USC Freshman studying CS",
-        "Founder of Nara: automating back-office operations at home care agencies",
-        "Built a 3D-printed glove with haptic actuators that simulates different surface textures"
-      ]
-    },
-    {
       "name": "Darrow Hartman",
       "link": "https://www.linkedin.com/in/darrow-hartman/",
       "image": "/profile/darrow.jpeg",
@@ -147,8 +136,17 @@ export default function TuringHouseLanding() {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-[#8C1515]">
-              Turing House
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/logo.png"
+                alt="Turing House"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
+              />
+              {/* <span className="text-2xl font-bold text-[#8C1515]">
+                Turing House
+              </span> */}
             </div>
 
             {/* Desktop Navigation */}
@@ -193,7 +191,7 @@ export default function TuringHouseLanding() {
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col justify-center items-center px-6 relative">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in text-[#8C1515] leading-tight">
             Turing House
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in-delay">
@@ -375,7 +373,13 @@ export default function TuringHouseLanding() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <div className="text-2xl font-bold text-[#8C1515] mb-2">
-                Turing House
+                <Image
+                  src="/logo.png"
+                  alt="Turing House"
+                  width={120}
+                  height={40}
+                  className="h-8 w-auto"
+                />
               </div>
               <div className="flex items-center text-gray-500">
                 <MapPin className="w-4 h-4 mr-2" />
@@ -389,9 +393,9 @@ export default function TuringHouseLanding() {
               <a href="#" className="text-gray-500 hover:text-[#8C1515] transition-colors">
                 <Github className="w-6 h-6" />
               </a> */}
-              {/* <a href="https://x.com/turing_house" className="text-gray-500 hover:text-[#8C1515] transition-colors">
+              <a href="https://x.com/turing_house" className="text-gray-500 hover:text-[#8C1515] transition-colors">
                 <X className="w-6 h-6" />
-              </a> */}
+              </a>
               <a href="mailto:house@turingsf.com" className="text-gray-500 hover:text-[#8C1515] transition-colors">
                 <Mail className="w-6 h-6" />
               </a>
