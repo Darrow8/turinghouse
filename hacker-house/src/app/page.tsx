@@ -195,7 +195,7 @@ export default function TuringHouseLanding() {
             Turing House
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in-delay">
-            We&apos;re a group of ambitious young founders building the future.
+            We&apos;re a group of ambitious young founders and builders.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
             <div className="w-full max-w-md">

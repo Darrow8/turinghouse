@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Turing House",
-  description: "A group of ambitious young founders building the future.",
+  description: "We are a community of ambitious young founders and builders.",
 };
 
 export default function RootLayout({
